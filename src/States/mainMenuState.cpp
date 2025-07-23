@@ -4,7 +4,7 @@
 #include <fstream>
 
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states) : State(window, supportedKeys, states) {
-    initKeybinds(std::string(RESOURCES_PATH) + "config/mainmenustate_keybinds.ini");
+    initKeybinds(std::string(RESOURCES_PATH) + "configs/mainmenustate_keybinds.ini");
     initFont();
     initButtons();
 }

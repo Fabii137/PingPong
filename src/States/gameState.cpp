@@ -5,7 +5,7 @@
 #include <iostream>
 
 GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states): State(window, supportedKeys, states) {
-	initKeybinds(std::string(RESOURCES_PATH) + "config/gamestate_keybinds.ini");
+	initKeybinds(std::string(RESOURCES_PATH) + "configs/gamestate_keybinds.ini");
 	m_Player1.setPosition(sf::Vector2f(100.f, 540.f));
 	m_Player2.setPosition(sf::Vector2f(1820.f, 540.f));
 	m_Ball.setPosition(sf::Vector2f(960.f, 540.f));

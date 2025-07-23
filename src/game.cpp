@@ -27,7 +27,7 @@ void Game::initStates() {
 }
 
 void Game::initSupportedKeys() {
-	std::ifstream ifs(std::string(RESOURCES_PATH) + "config/supported_keys.ini");
+	std::ifstream ifs(std::string(RESOURCES_PATH) + "configs/supported_keys.ini");
 
 	if (ifs.is_open()) {
 		std::string key = "";
@@ -43,7 +43,7 @@ void Game::initSupportedKeys() {
 
 void Game::applyConfig()
 {	
-	std::ifstream ifs(std::string(RESOURCES_PATH) + "config/window.ini");
+	std::ifstream ifs(std::string(RESOURCES_PATH) + "configs/window.ini");
 
 	sf::VideoMode windowBounds = sf::VideoMode::getDesktopMode();
 	std::string title = "None";
