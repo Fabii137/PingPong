@@ -37,17 +37,4 @@ PingPong/
 
 ---
 
-## 🚀 Build Instructions
-
-### Build via Visual Studio
-
-- Right click in the project folder and click **Open With Visual Studio**
-- Wait for it to load
-- **Debug:** Leave on x64-Debug
-- **Release:** Make a x64-Release Config 
-- Press **CTRL + B** to build
-- You can run it via **Visual Studio** 
-- Or via the executable in **./out/build/x64-Debug/** or **./out/build/x64-Release/**
-
----
 
