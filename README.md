@@ -5,7 +5,7 @@ Built with static SFML linking and supports both development and production mode
 
 ---
 
-## 📦 Features
+## Features
 
 - Built with **SFML 3.0.1** (statically linked)
 - Uses **CMake** for build configuration
@@ -13,7 +13,7 @@ Built with static SFML linking and supports both development and production mode
 
 ---
 
-## 🛠 Requirements
+## Requirements
 
 - C++17 compatible compiler (MSVC recommended for this setup)
 - [SFML 3.0.1](https://github.com/SFML/SFML) (included in `thirdparty/SFML-3.0.1`)
