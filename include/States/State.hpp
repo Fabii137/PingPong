@@ -11,7 +11,7 @@ public:
 	virtual ~State();
 	
 	const bool& getQuit() const;
-	void endState();
+	virtual void endState();
 
 	void updateMousePos();
 	virtual void update(const float& dt) = 0;

@@ -38,6 +38,6 @@ void State::initKeybinds(std::string& configPath) {
 		}
 	}
 	else {
-		throw("ERROR::STATE::COULD NOT LOAD KEYBINDS");
+		throw("ERROR::STATE::COULD NOT LOAD KEYBINDS (" + configPath + ")");
 	}
 }

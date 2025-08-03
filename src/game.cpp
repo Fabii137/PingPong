@@ -94,6 +94,7 @@ void Game::update() {
 	if (!m_States.empty()) {
 		m_States.top()->update(m_Dt);
 		if (m_States.top()->getQuit()) {
+			// remove current state from stack
 			std::cout << "State ended: " << typeid(*m_States.top()).name() << std::endl;
 			std::cout << "States remaining: " << m_States.size() - 1 << std::endl;
 			m_States.top()->endState();

@@ -11,6 +11,7 @@ public:
 
 	virtual void render(sf::RenderTarget* target) = 0;
 	virtual void update(const float& dt) = 0;
+	sf::Shape* getShape();
 	void setPosition(const sf::Vector2f& position);
 	void setSpeed(float speed);
 

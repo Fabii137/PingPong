@@ -9,6 +9,8 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 	m_Player1.setPosition(sf::Vector2f(100.f, 540.f));
 	m_Player2.setPosition(sf::Vector2f(1820.f, 540.f));
 	m_Ball.setPosition(sf::Vector2f(960.f, 540.f));
+	
+	m_Ball.start(); // start moving ball
 }
 
 GameState::~GameState() {
@@ -18,6 +20,8 @@ GameState::~GameState() {
 void GameState::update(const float& dt) {
 	updateMousePos();
 	updateInput(dt);
+
+	m_Ball.updateWithCollision(dt, *m_Player1.getShape(), *m_Player2.getShape(), *m_Window);
 }
 
 void GameState::render(sf::RenderTarget* target) {
