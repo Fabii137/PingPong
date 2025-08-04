@@ -13,9 +13,9 @@ public:
 	void update(const float& dt);
 	void render(sf::RenderTarget* target);
 private:
-	Player m_Player1;
-	Player m_Player2;
-	Ball m_Ball;
+	std::unique_ptr<Player> m_Player1;
+	std::unique_ptr<Player> m_Player2;
+	std::unique_ptr<Ball> m_Ball;
 private:
 	void updateInput(const float& dt);
 

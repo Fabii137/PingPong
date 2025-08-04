@@ -1,6 +1,6 @@
 #include "Entities/Player.hpp"
 
-Player::Player() {
+Player::Player(sf::RenderWindow& window): Entity(window) {
 	m_Shape = std::make_unique<sf::RectangleShape>(PLAYER_SIZE);
 	m_Shape->setFillColor(sf::Color::Green);
 }
@@ -20,5 +20,15 @@ void Player::update(const float& dt) {
 }
 
 void Player::move(const float& dt, const float& yDir) {
-	setPosition(m_Shape->getPosition() + sf::Vector2f(0, yDir * dt * m_Speed));
+	sf::Vector2f targetPos = m_Shape->getPosition() + sf::Vector2f(0, yDir * dt * m_Speed);
+	sf::FloatRect playerBounds = m_Shape->getGlobalBounds();
+
+	if ((targetPos.y + playerBounds.size.y) > m_Window.getSize().y) {
+		targetPos.y = m_Window.getSize().y - playerBounds.size.y;
+	}
+	if (targetPos.y < 0) {
+		targetPos.y = 0;
+	}
+
+	setPosition(targetPos);
 }

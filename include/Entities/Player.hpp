@@ -8,7 +8,7 @@
 
 class Player : public Entity {
 public:
-	Player();
+	Player(sf::RenderWindow& window);
 	virtual ~Player();
 
 	void render(sf::RenderTarget* target) override;

@@ -6,7 +6,7 @@
 
 class Entity {
 public:
-	Entity();
+	Entity(sf::RenderWindow& window);
 	virtual ~Entity();
 
 	virtual void render(sf::RenderTarget* target) = 0;
@@ -17,6 +17,7 @@ public:
 
 protected:
 	std::unique_ptr<sf::Shape> m_Shape;
+	sf::RenderWindow& m_Window;
 	float m_Speed = 300.f;
 };
 

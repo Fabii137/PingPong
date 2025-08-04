@@ -1,9 +1,10 @@
 #include "Entities/Ball.hpp"
 
-Ball::Ball() {
-	m_Shape = std::make_unique<sf::CircleShape>(BALL_RADIUS);
-	m_Shape->setFillColor(sf::Color::White);
-	srand(time(NULL));
+Ball::Ball(sf::Shape& player1, sf::Shape& player2, sf::RenderWindow& window)
+    : Entity(window), m_Player1(player1), m_Player2(player2) {
+    m_Shape = std::make_unique<sf::CircleShape>(BALL_RADIUS);
+    m_Shape->setFillColor(sf::Color::White);
+    srand(time(NULL));
 }
 
 Ball::~Ball() {
@@ -26,11 +27,11 @@ void Ball::render(sf::RenderTarget* target) {
 	}
 }
 
-void Ball::updateWithCollision(const float& dt, sf::Shape& player1, sf::Shape& player2, sf::RenderWindow& window) {
+void Ball::update(const float& dt) {
     sf::FloatRect ballBounds = m_Shape->getGlobalBounds();
-    sf::FloatRect p1Bounds = player1.getGlobalBounds();
-    sf::FloatRect p2Bounds = player2.getGlobalBounds();
-    sf::Vector2u windowSize = window.getSize();
+    sf::FloatRect p1Bounds = m_Player1.getGlobalBounds();
+    sf::FloatRect p2Bounds = m_Player2.getGlobalBounds();
+    sf::Vector2u windowSize = m_Window.getSize();
 
     sf::Vector2f targetPos = m_Shape->getPosition() + m_Velocity * dt;
 
@@ -38,19 +39,12 @@ void Ball::updateWithCollision(const float& dt, sf::Shape& player1, sf::Shape& p
         m_Velocity.y *= -1.f;
     }
 
-    sf::FloatRect futureBallBounds;
-    futureBallBounds.position = targetPos;
-    futureBallBounds.size = ballBounds.size;
+    sf::FloatRect futureBallBounds(targetPos, ballBounds.size);
 
     if (futureBallBounds.findIntersection(p1Bounds) || futureBallBounds.findIntersection(p2Bounds)) {
         m_Velocity.x *= -1.f;
     }
 
     m_Shape->move(m_Velocity * dt);
-}
-
-
-void Ball::update(const float& dt) {
-	
 }
 

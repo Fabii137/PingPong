@@ -1,7 +1,9 @@
 #include "Entities/Entity.hpp"
 
-Entity::Entity() {
-	
+
+Entity::Entity(sf::RenderWindow& window): m_Window(window)
+{
+
 }
 
 Entity::~Entity() {
