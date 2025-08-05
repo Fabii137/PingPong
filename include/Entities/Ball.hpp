@@ -11,6 +11,8 @@ public:
 	virtual ~Ball();
 
 	void start();
+	void reset();
+	void stop();
 	void render(sf::RenderTarget* target) override;
 	void update(const float& dt) override;
 private:
