@@ -27,7 +27,7 @@ protected:
 	sf::Vector2i m_MousePosWindow;
 	sf::Vector2f m_MousePosView;
 protected:
-	void initKeybinds(std::string& configPath);
+	void initKeybinds(const std::string& configPath);
 };
 
 #endif /* STATE_HPP */

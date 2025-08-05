@@ -28,7 +28,7 @@ void State::updateMousePos() {
 	m_MousePosView = m_Window->mapPixelToCoords(sf::Mouse::getPosition(*m_Window));
 }
 
-void State::initKeybinds(std::string& configPath) {
+void State::initKeybinds(const std::string& configPath) {
 	std::ifstream ifs(configPath);
 	if (ifs.is_open()) {
 		std::string name = "";
