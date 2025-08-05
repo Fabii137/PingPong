@@ -2,7 +2,9 @@
 
 Player::Player(sf::RenderWindow& window): Entity(window) {
 	m_Shape = std::make_unique<sf::RectangleShape>(PLAYER_SIZE);
-	m_Shape->setFillColor(sf::Color::Green);
+	m_Shape->setFillColor(sf::Color::Black);
+	m_Shape->setOutlineColor(sf::Color::Cyan);
+	m_Shape->setOutlineThickness(3.f);
 }
 
 Player::~Player() {
