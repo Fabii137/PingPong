@@ -3,8 +3,6 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-set(CMAKE_CXX_STANDARD 17)
-
 #! ! ! ! ! ! !
 #set this to true to ship the game!
 #basically this will change the RESOURCES_PATH to be the local path
@@ -21,9 +19,6 @@ set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) #link time optimization
 
 # Ensure SFML is built as static libraries
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build SFML as static libraries" FORCE)
-
-#for imgui-sfml
-set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/imgui-docking/imgui")
 
 if(MSVC) 
 add_compile_options(/arch:AVX2) #make sure SIMD optimizations take place
@@ -45,7 +40,7 @@ file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/
 
 add_executable("${CMAKE_PROJECT_NAME}")
 
-set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
+set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 20)
 
 
 
