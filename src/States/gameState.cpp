@@ -153,6 +153,5 @@ void GameState::resetRound() {
 	m_Player2->setPosition(sf::Vector2f(1820.f, 540.f));
 
 	m_Ball->setPosition(sf::Vector2f(960.f, 540.f));
-	m_Ball->reset();
 	m_Ball->start();
 }
