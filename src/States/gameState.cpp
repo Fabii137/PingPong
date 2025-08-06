@@ -52,20 +52,26 @@ void GameState::initFont() {
 }
 
 void GameState::initText() {
+	sf::Vector2u windowSize = m_Window->getSize();
+
 	m_ScoreText1 = std::make_unique<sf::Text>(m_Font, "0", 50);
-	m_ScoreText1->setPosition(sf::Vector2f(200.f, 100.f));
+	m_ScoreText1->setPosition(sf::Vector2f(windowSize.x * 0.2f, windowSize.y * 0.1f));
 	m_ScoreText1->setFillColor(sf::Color::White);
 
 	m_ScoreText2 = std::make_unique<sf::Text>(m_Font, "0", 50);
-	m_ScoreText2->setPosition(sf::Vector2f(1700.f, 100.f));
+	m_ScoreText2->setPosition(sf::Vector2f(windowSize.x * 0.8f, windowSize.y * 0.1f));
 	m_ScoreText2->setFillColor(sf::Color::White);
 
-	m_WonText = std::make_unique<sf::Text>(m_Font, "", 50);
-	m_WonText->setPosition(sf::Vector2f(800.f, 200.f));
+	m_WonText = std::make_unique<sf::Text>(m_Font, "Player x won", 50);
+	sf::FloatRect wonTextBounds = m_WonText->getLocalBounds();
+	// center with -50.0 y offset
+	m_WonText->setPosition(sf::Vector2f(windowSize.x / 2.f - wonTextBounds.size.x / 2.f, windowSize.y / 2.f - wonTextBounds.size.y / 2.f - 50.f));
 	m_WonText->setFillColor(sf::Color::White);
 
-	m_RestartText = std::make_unique<sf::Text>(m_Font, "", 40);
-	m_RestartText->setPosition(sf::Vector2f(800.f, 400.f));
+	m_RestartText = std::make_unique<sf::Text>(m_Font, "Press Space to play again...", 40);
+	sf::FloatRect restartTextBounds = m_RestartText->getLocalBounds();
+	// center with +50.0 y offset
+	m_RestartText->setPosition(sf::Vector2f(windowSize.x / 2.f - restartTextBounds.size.x / 2.f, windowSize.y / 2.f - restartTextBounds.size.y / 2.f + 50.f));
 	m_RestartText->setFillColor(sf::Color::White);
 }
 
@@ -142,7 +148,6 @@ void GameState::checkWin() {
 	if (m_ScorePlayer1 >= m_MaxScore || m_ScorePlayer2 >= m_MaxScore) {
 		std::string wonText = std::format("Player {} won!", (m_ScorePlayer1 >= m_MaxScore ? "1" : "2"));
 		m_WonText->setString(wonText);
-		m_RestartText->setString("Press Space to play again!");
 		m_GameOver = true;
 		m_Ball->stop();
 	}
