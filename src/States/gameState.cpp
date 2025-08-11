@@ -10,7 +10,7 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 	initText();
 	initGameObjects();
 
-	m_Ball->start(); // start moving ball
+	m_Ball->start();
 }
 
 GameState::~GameState() {
@@ -22,6 +22,7 @@ void GameState::update(const float& dt) {
 	updateInput(dt);
 
 	m_Ball->update(dt);
+
 	checkWin();
 }
 
@@ -52,20 +53,23 @@ void GameState::initFont() {
 }
 
 void GameState::initText() {
+	sf::Vector2u windowSize = m_Window->getSize();
+
+
 	m_ScoreText1 = std::make_unique<sf::Text>(m_Font, "0", 50);
-	m_ScoreText1->setPosition(sf::Vector2f(200.f, 100.f));
+	m_ScoreText1->setPosition(sf::Vector2f(windowSize.x * 0.1f, windowSize.y * 0.1f));
 	m_ScoreText1->setFillColor(sf::Color::White);
 
 	m_ScoreText2 = std::make_unique<sf::Text>(m_Font, "0", 50);
-	m_ScoreText2->setPosition(sf::Vector2f(1700.f, 100.f));
+	m_ScoreText2->setPosition(sf::Vector2f(windowSize.x * 0.9f, windowSize.y * 0.1f));
 	m_ScoreText2->setFillColor(sf::Color::White);
 
-	m_WonText = std::make_unique<sf::Text>(m_Font, "", 50);
-	m_WonText->setPosition(sf::Vector2f(800.f, 200.f));
+	m_WonText = std::make_unique<sf::Text>(m_Font, "Player 0 won the game", 40);
+	centerText(*m_WonText, -50);
 	m_WonText->setFillColor(sf::Color::White);
 
-	m_RestartText = std::make_unique<sf::Text>(m_Font, "", 40);
-	m_RestartText->setPosition(sf::Vector2f(800.f, 400.f));
+	m_RestartText = std::make_unique<sf::Text>(m_Font, "Press Space to restart...", 40);
+	centerText(*m_RestartText, 50);
 	m_RestartText->setFillColor(sf::Color::White);
 }
 
@@ -125,6 +129,9 @@ void GameState::updateInput(const float& dt) {
 }
 
 void GameState::checkWin() {
+	if (m_GameOver)
+		return;
+
 	sf::Vector2f ballPos = m_Ball->getShape()->getPosition();
 	sf::Vector2u windowSize = m_Window->getSize();
 
@@ -142,7 +149,6 @@ void GameState::checkWin() {
 	if (m_ScorePlayer1 >= m_MaxScore || m_ScorePlayer2 >= m_MaxScore) {
 		std::string wonText = std::format("Player {} won!", (m_ScorePlayer1 >= m_MaxScore ? "1" : "2"));
 		m_WonText->setString(wonText);
-		m_RestartText->setString("Press Space to play again!");
 		m_GameOver = true;
 		m_Ball->stop();
 	}
@@ -153,6 +159,5 @@ void GameState::resetRound() {
 	m_Player2->setPosition(sf::Vector2f(1820.f, 540.f));
 
 	m_Ball->setPosition(sf::Vector2f(960.f, 540.f));
-	m_Ball->reset();
 	m_Ball->start();
 }

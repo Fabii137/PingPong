@@ -15,17 +15,14 @@ Ball::~Ball() {
 }
 
 void Ball::start() {
+    m_Speed = 300.f;
 	int rndX = rand() % 2;
 	int rndY = rand() % 2;
 	bool startLeft = rndX == 0;
 	bool startUp = rndY == 0;
 
-	m_Velocity.x = startLeft ? -m_Speed : m_Speed;
-	m_Velocity.y = (startUp ? -1.f : 1.f) * m_Speed * .5f;
-}
 
-void Ball::reset() {
-    m_Speed = 300.f;
+    m_Velocity = sf::Vector2f(startUp ? -1.f : 1.f, startLeft ? -0.5f : 0.5f);
 }
 
 void Ball::stop() {
@@ -44,7 +41,7 @@ void Ball::update(const float& dt) {
     sf::FloatRect p2Bounds = m_Player2.getGlobalBounds();
     sf::Vector2u windowSize = m_Window.getSize();
 
-    sf::Vector2f targetPos = m_Shape->getPosition() + m_Velocity * dt;
+    sf::Vector2f targetPos = m_Shape->getPosition() + m_Velocity * m_Speed * dt;
 
     if (targetPos.y <= 0 || (targetPos.y + ballBounds.size.y) >= windowSize.y) {
         m_Velocity.y *= -1.f;
@@ -58,6 +55,6 @@ void Ball::update(const float& dt) {
         m_Speed += 50.f;
     }
 
-    m_Shape->move(m_Velocity * dt);
+    m_Shape->move(m_Velocity * m_Speed * dt);
 }
 
