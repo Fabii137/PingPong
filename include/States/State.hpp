@@ -28,6 +28,7 @@ protected:
 	sf::Vector2f m_MousePosView;
 protected:
 	void initKeybinds(const std::string& configPath);
+	void centerText(sf::Text& text, float offsetY);
 };
 
 #endif /* STATE_HPP */
