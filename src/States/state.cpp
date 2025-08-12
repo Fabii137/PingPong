@@ -41,3 +41,14 @@ void State::initKeybinds(const std::string& configPath) {
 		throw("ERROR::STATE::COULD NOT LOAD KEYBINDS (" + configPath + ")");
 	}
 }
+
+void State::centerText(sf::Text& text, float offsetY) {
+	sf::Vector2u windowSize = m_Window->getSize();
+	sf::FloatRect textBounds = text.getLocalBounds();
+
+	text.setOrigin(sf::Vector2f(textBounds.position.x + textBounds.size.x / 2.0f,
+		textBounds.position.y + textBounds.size.y / 2.0f));
+
+	text.setPosition(sf::Vector2f(windowSize.x / 2.0f, windowSize.y / 2.0f));
+}
+

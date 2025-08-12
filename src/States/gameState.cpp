@@ -10,7 +10,7 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 	initText();
 	initGameObjects();
 
-	m_Ball->start(); // start moving ball
+	m_Ball->start();
 }
 
 GameState::~GameState() {
@@ -22,6 +22,7 @@ void GameState::update(const float& dt) {
 	updateInput(dt);
 
 	m_Ball->update(dt);
+
 	checkWin();
 }
 
@@ -54,24 +55,21 @@ void GameState::initFont() {
 void GameState::initText() {
 	sf::Vector2u windowSize = m_Window->getSize();
 
+
 	m_ScoreText1 = std::make_unique<sf::Text>(m_Font, "0", 50);
-	m_ScoreText1->setPosition(sf::Vector2f(windowSize.x * 0.2f, windowSize.y * 0.1f));
+	m_ScoreText1->setPosition(sf::Vector2f(windowSize.x * 0.1f, windowSize.y * 0.1f));
 	m_ScoreText1->setFillColor(sf::Color::White);
 
 	m_ScoreText2 = std::make_unique<sf::Text>(m_Font, "0", 50);
-	m_ScoreText2->setPosition(sf::Vector2f(windowSize.x * 0.8f, windowSize.y * 0.1f));
+	m_ScoreText2->setPosition(sf::Vector2f(windowSize.x * 0.9f, windowSize.y * 0.1f));
 	m_ScoreText2->setFillColor(sf::Color::White);
 
-	m_WonText = std::make_unique<sf::Text>(m_Font, "Player x won", 50);
-	sf::FloatRect wonTextBounds = m_WonText->getLocalBounds();
-	// center with -50.0 y offset
-	m_WonText->setPosition(sf::Vector2f(windowSize.x / 2.f - wonTextBounds.size.x / 2.f, windowSize.y / 2.f - wonTextBounds.size.y / 2.f - 50.f));
+	m_WonText = std::make_unique<sf::Text>(m_Font, "Player 0 won the game", 40);
+	centerText(*m_WonText, -50);
 	m_WonText->setFillColor(sf::Color::White);
 
-	m_RestartText = std::make_unique<sf::Text>(m_Font, "Press Space to play again...", 40);
-	sf::FloatRect restartTextBounds = m_RestartText->getLocalBounds();
-	// center with +50.0 y offset
-	m_RestartText->setPosition(sf::Vector2f(windowSize.x / 2.f - restartTextBounds.size.x / 2.f, windowSize.y / 2.f - restartTextBounds.size.y / 2.f + 50.f));
+	m_RestartText = std::make_unique<sf::Text>(m_Font, "Press Space to restart...", 40);
+	centerText(*m_RestartText, 50);
 	m_RestartText->setFillColor(sf::Color::White);
 }
 
@@ -131,6 +129,9 @@ void GameState::updateInput(const float& dt) {
 }
 
 void GameState::checkWin() {
+	if (m_GameOver)
+		return;
+
 	sf::Vector2f ballPos = m_Ball->getShape()->getPosition();
 	sf::Vector2u windowSize = m_Window->getSize();
 
